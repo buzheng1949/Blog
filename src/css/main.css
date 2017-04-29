@@ -1,0 +1,50 @@
+header{
+   height:93px;
+   background: #f5f5f5;
+}
+
+header nav {
+    width: 900px;
+    padding: 25px 0 20px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.logo{
+    /*display: inline-block;*/
+
+    float: left;
+}
+.logo a{
+    font-size:20px;
+    color: #222;
+    font-family: 'Neucha', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+header nav ul{
+    list-style: none;
+}
+
+header nav ul li{
+    float: right;
+    text-align: center;
+}
+
+
+header nav ul li a {
+    display: block;
+    font-size: 13px;
+    line-height: inherit;
+    padding: 0 10px;
+    text-decoration: none;
+    color: #555;
+}
+
+header nav ul li{
+    float: right;
+}
+
+.main-inner{
+    width: 900px;
+    margin-top: 80px;
+    display: block;
+}
