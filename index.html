@@ -27,30 +27,24 @@
 </header>
 <!--内容-->
 <div class="content">
-    <ol class="article-list">
-        <li class="article-list-item">
-            <h3 class="article-list-item-name"><a href="http://www.baidu.com">我的第一篇文章</a></h3>
-             <p class="article-list-item-descripition">这里是文章的简介</p>
-             <p class="article-list-item-time">2017年4月28日</p>
-        </li>
-        <li class="article-list-item">
-            <h3 class="article-list-item-name"><a href="http://www.baidu.com">我的第一篇文章</a></h3>
-            <p class="article-list-item-descripition">这里是文章的简介</p>
-            <p class="article-list-item-time">2017年4月28日</p>
-        </li>
-        <li class="article-list-item">
-            <h3 class="article-list-item-name"><a href="http://www.baidu.com">我的第一篇文章</a></h3>
-            <p class="article-list-item-descripition">这里是文章的简介</p>
-            <p class="article-list-item-time">2017年4月28日</p>
-        </li>
-        <li class="article-list-item">
-            <h3 class="article-list-item-name"><a href="http://www.baidu.com">我的第一篇文章</a></h3>
-            <p class="article-list-item-descripition">这里是文章的简介</p>
-            <p class="article-list-item-time">2017年4月28日</p>
-        </li>
-    </ol>
 </div>
 <!--尾部-->
 <footer>尾部</footer>
+<script>
+    $(function () {
+        for(var i = 0;i<3;i++){
+            var article_list=$('<ol></ol>').addClass("article-list");
+            var article_list_item = $('<li></li>').addClass("article-list-item");
+            var article_list_item_name= $('<h3></h3>').addClass("article-list-item-name");
+            var article_href=$('<a></a>').text("我的第一篇文章").attr('href',"http://www.baidu.com");
+            article_list_item_name.append(article_href);
+            var article_list_item_descripition= $('<p></p>').addClass("article-list-item-descripition").text("文章简介");
+            var article_list_item_time= $('<p></p>').addClass("article-list-item-time").text("2017年4月28日");
+            article_list_item.append(article_list_item_name,article_list_item_descripition,article_list_item_time);
+            article_list.append(article_list_item);
+            $(".content").append(article_list);
+        }
+    });
+</script>
 </body>
 </html>
