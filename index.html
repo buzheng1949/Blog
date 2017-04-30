@@ -7,29 +7,39 @@
     <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/main.css">
     <script type="text/javascript" src="src/js/jquery-3.2.1.min.js"></script>
-
-
+    <script type="text/javascript" src="src/js/Pagination.js"></script>
 </head>
 <body>
 <!--头部-->
 <header>
     <nav>
         <ul class="menu">
-            <li class="logo"><a href="#">不正1943</a></li>
-            <li id="search"><a href="#">搜索</a></li>
+            <li class="logo"><a href="#"><span class="logo_mark"></span>不正1949</a></li>
             <li id="about"><a href="#">关于</a></li>
-            <li id="tags"><a href="#">标签</a></li>
+            <li id="tags"><a href="#">链接</a></li>
             <li id="guidang"><a href="#">归档</a></li>
             <li id="sort"><a href="#">分类</a></li>
             <li id="home"><a href="#">首页</a></li>
         </ul>
     </nav>
 </header>
+
 <!--内容-->
 <div class="content">
+
 </div>
 <!--尾部-->
-<footer>尾部</footer>
+<footer>
+    <ul class="last">
+        <li ><a href="#" class="myshow">@2017 buzheng1949</a></li>
+        <li ><a href="#">首页</a></li>
+        <li ><a href="#">分类</a></li>
+        <li ><a href="#">归档</a></li>
+        <li ><a href="#">标签</a></li>
+        <li ><a href="#">关于</a></li>
+        <li class="top"><a href="javascript:window.scrollTo(0,0)">TOP</a></li>
+    </ul>
+</footer>
 <script>
     /**
      * 显示文章到首页
@@ -45,7 +55,7 @@
         var article_list = $('<ol></ol>').addClass("article-list");
         var article_list_item = $('<li></li>').addClass("article-list-item");
         var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
-        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href);
+        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target","_blank");
         article_list_item_name.append(article_href);
         var article_list_item_descripition = $('<p></p>').addClass("article-list-item-descripition").text(article_descripition);
         var article_list_item_time = $('<p></p>').addClass("article-list-item-time").text(article_time);
@@ -53,12 +63,23 @@
         article_list.append(article_list_item);
         $(".content").append(article_list);
     }
+    function hover(){
+        var beforecolor;
+        $("header nav ul li").hover(function () {
+            beforecolor=$(this).children("a").css("color");
+            $(this).children("a").css("color","#fff");
+        },function () {
+            $(this).children("a").css("color",beforecolor);
+        });
+    }
     $(function () {
+
         var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";
         var issues_json;
         var description_length = 50;
         var time_length = 10;
 
+        hover()
         /**
          * 用户获取Json长度
          * @param jsonData
@@ -88,6 +109,8 @@
                 appendArticleToHome(title, url, des, time);
             }
         });
+
+
     });
 </script>
 </body>
