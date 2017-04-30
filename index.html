@@ -6,7 +6,6 @@
     <title>不正1943</title>
     <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/main.css">
-    <!--<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">-->
     <script type="text/javascript" src="src/js/jquery-3.2.1.min.js"></script>
 
 
@@ -32,19 +31,63 @@
 <!--尾部-->
 <footer>尾部</footer>
 <script>
+    /**
+     * 显示文章到首页
+     *
+     * @param article_title
+     * @param article_tile_href
+     * @param article_descripition
+     * @param article_time
+     *
+     * @returns {number}
+     */
+    function appendArticleToHome(article_title, article_tile_href, article_descripition, article_time) {
+        var article_list = $('<ol></ol>').addClass("article-list");
+        var article_list_item = $('<li></li>').addClass("article-list-item");
+        var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
+        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href);
+        article_list_item_name.append(article_href);
+        var article_list_item_descripition = $('<p></p>').addClass("article-list-item-descripition").text(article_descripition);
+        var article_list_item_time = $('<p></p>').addClass("article-list-item-time").text(article_time);
+        article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_time);
+        article_list.append(article_list_item);
+        $(".content").append(article_list);
+    }
     $(function () {
-        for(var i = 0;i<3;i++){
-            var article_list=$('<ol></ol>').addClass("article-list");
-            var article_list_item = $('<li></li>').addClass("article-list-item");
-            var article_list_item_name= $('<h3></h3>').addClass("article-list-item-name");
-            var article_href=$('<a></a>').text("我的第一篇文章").attr('href',"http://www.baidu.com");
-            article_list_item_name.append(article_href);
-            var article_list_item_descripition= $('<p></p>').addClass("article-list-item-descripition").text("文章简介");
-            var article_list_item_time= $('<p></p>').addClass("article-list-item-time").text("2017年4月28日");
-            article_list_item.append(article_list_item_name,article_list_item_descripition,article_list_item_time);
-            article_list.append(article_list_item);
-            $(".content").append(article_list);
+        var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";
+        var issues_json;
+        var description_length = 50;
+        var time_length = 10;
+
+        /**
+         * 用户获取Json长度
+         * @param jsonData
+         * @returns {number}
+         */
+        function getJsonLength(jsonData) {
+            var jsonLength = 0;
+            for (var item in jsonData) {
+                jsonLength++;
+            }
+            return jsonLength;
         }
+
+
+        /**
+         * 获取数据并展示在首页
+         */
+        $.getJSON(issues_url, function (json) {
+            console.log(json)
+            issues_json = json;
+            for (var i = 0; i < getJsonLength(issues_json); i++) {
+                var issue = issues_json[i];
+                var title = issue.title;
+                var url = issue.html_url;
+                var des = issue.body.toString().substring(0, description_length)+"...";
+                var time = issue.created_at.toString().substring(0,time_length);
+                appendArticleToHome(title, url, des, time);
+            }
+        });
     });
 </script>
 </body>
