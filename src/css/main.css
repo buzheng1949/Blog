@@ -38,13 +38,14 @@ header nav ul li{
 
 
 header nav ul li a {
-    font-family: Arial,"Hiragino Sans GB","å†¬é’é»‘","Microsoft YaHei";
+    font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
     display: block;
-    font-size: 13px;
+    font-size: 1rem;
     line-height: inherit;
-    padding: 0 10px;
+    padding: 0 20px;
     text-decoration: none;
     color: rgba(255, 255, 255, .5);
+    word-wrap: break-word;
 }
 
 header nav ul li{
@@ -52,6 +53,7 @@ header nav ul li{
 }
 
 .content{
+    overflow: hidden;
     font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
     font-size: 16px;
     line-height: 1.6;
@@ -64,6 +66,18 @@ header nav ul li{
     margin: 0 auto;
 }
 
+.content_article{
+    width: 66.666667%;
+    float: left;
+}
+
+.content_other{
+    float: right;
+}
+
+.content_other h3{
+    margin-top: 40px;
+}
 .article-list{
     position: relative;
     padding-left: 0;
@@ -136,5 +150,34 @@ footer ul li a{
     margin-right: 100px;
     float: right;
 }
+
+#site_search{
+    float: left;
+}
+.search_box{
+    width: 210px;
+    height: 26px;
+    margin-bottom: 10px;
+}
+
+.search_btn{
+    color: #333;
+    background-color: #eee;
+    border: 1px solid #d5d5d5;
+    boder-radius:3px;
+    padding: 6px 12px;
+}
+.search_result_content{
+    margin-top: 10px;
+    list-style: none;
+    padding: 5px;
+}
+.serach_result ul li a{
+    font-size: 14px;
+    color: #4183c4;
+    text-decoration: none;
+}
+
+
 
 

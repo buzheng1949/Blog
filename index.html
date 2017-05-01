@@ -26,17 +26,34 @@
 
 <!--内容-->
 <div class="content">
-
+    <div class="content_article"></div>
+    <div class="content_other">
+        <h3>Search</h3>
+        <!--搜索以及结果显示-->
+        <div id="site_search">
+            <input type="text" id="search_box" placeholder="Search" class="search_box">
+            <button class="search_btn" id="search_btn_search">搜索</button>
+        </div>
+        <!--动态生成结果-->
+        <div class="serach_result" id="search_result">
+            <ul class="search_result_content" >
+                <!--<li><a href="#">我的日志第一篇</a></li>-->
+                <!--<li><a href="#">我的日志第一篇</a></li>-->
+                <!--<li><a href="#">我的日志第一篇</a></li>-->
+                <!--<li><a href="#">我的日志第一篇</a></li>-->
+            </ul>
+        </div>
+    </div>
 </div>
 <!--尾部-->
 <footer>
     <ul class="last">
-        <li ><a href="#" class="myshow">@2017 buzheng1949</a></li>
-        <li ><a href="#">首页</a></li>
-        <li ><a href="#">分类</a></li>
-        <li ><a href="#">归档</a></li>
-        <li ><a href="#">标签</a></li>
-        <li ><a href="#">关于</a></li>
+        <li><a href="#" class="myshow">@2017 buzheng1949</a></li>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">分类</a></li>
+        <li><a href="#">归档</a></li>
+        <li><a href="#">标签</a></li>
+        <li><a href="#">关于</a></li>
         <li class="top"><a href="javascript:window.scrollTo(0,0)">TOP</a></li>
     </ul>
 </footer>
@@ -55,58 +72,99 @@
         var article_list = $('<ol></ol>').addClass("article-list");
         var article_list_item = $('<li></li>').addClass("article-list-item");
         var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
-        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target","_blank");
+        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target", "_blank");
         article_list_item_name.append(article_href);
         var article_list_item_descripition = $('<p></p>').addClass("article-list-item-descripition").text(article_descripition);
         var article_list_item_time = $('<p></p>').addClass("article-list-item-time").text(article_time);
         article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_time);
         article_list.append(article_list_item);
-        $(".content").append(article_list);
+        $(".content_article").append(article_list);
     }
-    function hover(){
+
+    /**
+     * 处理鼠标移动移出的区别
+     */
+    function hover() {
+//        处理顶部导航栏的效果
         var beforecolor;
         $("header nav ul li").hover(function () {
-            beforecolor=$(this).children("a").css("color");
-            $(this).children("a").css("color","#fff");
-        },function () {
-            $(this).children("a").css("color",beforecolor);
+            beforecolor = $(this).children("a").css("color");
+            $(this).children("a").css("color", "#fff");
+        }, function () {
+            $(this).children("a").css("color", beforecolor);
         });
-    }
-    $(function () {
 
+    }
+
+    var articles = new Array();
+    //    所有的文章先放在数组里面
+    function addArticlesToArray(articleNum, articleName) {
+        articles[articleNum] = articleName;
+    }
+
+//    处理搜索结果，将搜索结果显示
+    function addArticlesToSearchResult(article_title,article_href){
+//        var search_list= $("<ul></ul>").addClass("search_result_content");
+        var search_item = $('<li></li>');
+        var search_href= $('<a></a>').text(article_title).attr("href",article_href);
+        search_item.append(search_href);
+//        search_list.append(search_item);
+        $('.search_result_content').append(search_item);
+    }
+
+    /**
+     * 用户获取Json长度
+     * @param jsonData
+     * @returns {number}
+     */
+    function getJsonLength(jsonData) {
+        var jsonLength = 0;
+        for (var item in jsonData) {
+            jsonLength++;
+        }
+        return jsonLength;
+    }
+
+
+
+    //    整个页面处理入口
+    $(function () {
         var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";
         var issues_json;
         var description_length = 50;
         var time_length = 10;
 
         hover()
-        /**
-         * 用户获取Json长度
-         * @param jsonData
-         * @returns {number}
-         */
-        function getJsonLength(jsonData) {
-            var jsonLength = 0;
-            for (var item in jsonData) {
-                jsonLength++;
-            }
-            return jsonLength;
-        }
-
 
         /**
          * 获取数据并展示在首页
          */
         $.getJSON(issues_url, function (json) {
-            console.log(json)
             issues_json = json;
             for (var i = 0; i < getJsonLength(issues_json); i++) {
                 var issue = issues_json[i];
                 var title = issue.title;
                 var url = issue.html_url;
-                var des = issue.body.toString().substring(0, description_length)+"...";
-                var time = issue.created_at.toString().substring(0,time_length);
+                var des = issue.body.toString().substring(0, description_length) + "...";
+                var time = issue.created_at.toString().substring(0, time_length);
                 appendArticleToHome(title, url, des, time);
+                addArticlesToArray(i, issue);
+            }
+
+
+        });
+
+        //给按钮增加点击事件  并将结果显示在结果栏
+        $("#search_btn_search").on("click", function () {
+            $(".search_result_content").empty();
+            //好象只能通过这份方法获取文本框的文字
+            var input_value = $("#search_box").val();
+            for (var i = 0; i < articles.length; i++) {
+                var issue = articles[i];
+                if (issue.title.search(input_value) != -1) {
+                    addArticlesToSearchResult(issue.title,issue.html_url);
+                }
+
             }
         });
 
