@@ -103,11 +103,18 @@ header nav ul li{
     color: #4183C4;
 }
 
-.article-list-item-time{
+.article-list-item-other-msg{
     font: normal normal normal 13px/1 octicons;
     display: inline-block;
     text-decoration: none;
     text-rendering: auto;
+    color: #999;
+}
+
+.article-list-item-other-msg-detail{
+    font: normal normal normal 13px/1 octicons;
+    display: inline-block;
+    margin-right: 20px;
     color: #999;
 }
 

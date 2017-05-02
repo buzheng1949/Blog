@@ -37,10 +37,7 @@
         <!--动态生成结果-->
         <div class="serach_result" id="search_result">
             <ul class="search_result_content" >
-                <!--<li><a href="#">我的日志第一篇</a></li>-->
-                <!--<li><a href="#">我的日志第一篇</a></li>-->
-                <!--<li><a href="#">我的日志第一篇</a></li>-->
-                <!--<li><a href="#">我的日志第一篇</a></li>-->
+
             </ul>
         </div>
     </div>
@@ -69,14 +66,17 @@
      * @returns {number}
      */
     var article_list = $('<ol></ol>').addClass("article-list");
-    function appendArticleToHome(article_title, article_tile_href, article_descripition, article_time) {
+    function appendArticleToHome(article_title, article_tile_href, article_descripition, article_time,article_category) {
         var article_list_item = $('<li></li>').addClass("article-list-item");
         var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
         var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target", "_blank");
         article_list_item_name.append(article_href);
         var article_list_item_descripition = $('<p></p>').addClass("article-list-item-descripition").text(article_descripition);
-        var article_list_item_time = $('<p></p>').addClass("article-list-item-time").text(article_time);
-        article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_time);
+        var article_list_item_other_msg = $('<p></p>').addClass("article-list-item-other-msg");
+        var article_list_item_time = $('<span></span>').text(article_time).addClass("article-list-item-other-msg-detail");
+        var article_list_item_category = $('<span></span>').text(article_category).addClass("article-list-item-other-msg-detail");
+        article_list_item_other_msg.append(article_list_item_time,article_list_item_category);
+        article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_other_msg);
         article_list.append(article_list_item);
 
     }
@@ -147,7 +147,8 @@
                 var url = issue.html_url;
                 var des = issue.body.toString().substring(0, description_length) + "...";
                 var time = issue.created_at.toString().substring(0, time_length);
-                appendArticleToHome(title, url, des, time);
+                var category = issue.milestone.title;
+                appendArticleToHome(title, url, des, time,category);
                 addArticlesToArray(i, issue);
             }
 
