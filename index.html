@@ -68,8 +68,8 @@
      *
      * @returns {number}
      */
+    var article_list = $('<ol></ol>').addClass("article-list");
     function appendArticleToHome(article_title, article_tile_href, article_descripition, article_time) {
-        var article_list = $('<ol></ol>').addClass("article-list");
         var article_list_item = $('<li></li>').addClass("article-list-item");
         var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
         var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target", "_blank");
@@ -78,7 +78,7 @@
         var article_list_item_time = $('<p></p>').addClass("article-list-item-time").text(article_time);
         article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_time);
         article_list.append(article_list_item);
-        $(".content_article").append(article_list);
+
     }
 
     /**
@@ -151,6 +151,8 @@
                 addArticlesToArray(i, issue);
             }
 
+            //处理完加入到整体布局之中
+            $(".content_article").append(article_list);
 
         });
 
