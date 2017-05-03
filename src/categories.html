@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/categories.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/Pagination.js"></script>
+</head>
+<body>
+<!--头部-->
+<header>
+    <nav>
+        <ul class="menu">
+            <li class="logo"><a href=""><span class="logo_mark"></span>不正1949</a></li>
+            <li id="about"><a href="#">关于</a></li>
+            <li id="sort"><a href="#">分类</a></li>
+            <li id="home"><a href="../index.html">首页</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!--内容-->
+<div class="content">
+    <div class="content_article">
+        <h3>Android</h3>
+        <ol id="android" class="categories-list">
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+        </ol>
+        <h3>iOS</h3>
+        <ol id="ios" class="categories-list">
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+            <li class="categories-list-item">
+                <span class="categories-list-item-time">2017-11-20</span>
+                <a href="#" class="categories-list-item-name">我的文章第一篇</a>
+            </li>
+        </ol>
+    </div>
+    <div class="content_other">
+        <h3>Search</h3>
+        <!--搜索以及结果显示-->
+        <div id="site_search">
+            <input type="text" id="search_box" placeholder="Search" class="search_box">
+            <button class="search_btn" id="search_btn_search">搜索</button>
+        </div>
+        <!--动态生成结果-->
+        <div class="serach_result" id="search_result">
+            <ul class="search_result_content" >
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!--尾部-->
+<footer>
+    <ul class="last">
+        <li><a href="#" class="myshow">@2017 buzheng1949</a></li>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">分类</a></li>
+        <li><a href="#">归档</a></li>
+        <li><a href="#">标签</a></li>
+        <li><a href="#">关于</a></li>
+        <li><a href="javascript:window.scrollTo(0,0)">TOP</a></li>
+    </ul>
+</footer>
+<script>
+    /**
+     * 构建显示文章分类到页面中
+     * @param articleCategory 文章分类
+     * @param article_time  文章发表时间
+     * @param articleName  文章名字
+     * @param article_href  文章链接
+     */
+    function appendCategoriesToWindow(articleCategory,article_time,articleName,article_href) {
+        
+    }
+    $(function () {
+        //1、先加载数据到页面中 动态生成分类以及不同的文章列表
+        
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+.categories-list{
+    line-height: 2;
+    color: #555;
+    list-style: disc;
+}
+
+.categories-list-item{
+    border-bottom: 1px dashed #ccc;
+    margin: 10px;
+    padding: 0;
+}
+
+.categories-list-item-time{
+    font-size: 12px;
+    font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 2;
+    color: #555;
+    background: #fff;
+}
+
+.categories-list-item-name{
+    font-size: 16px;
+    font-weight: normal;
+    font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: inherit;
+    color: #666;
+}
+
+.categories-list-item a{
+    text-decoration: none;
+    background-color: transparent;
+}

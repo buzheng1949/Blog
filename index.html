@@ -14,11 +14,9 @@
 <header>
     <nav>
         <ul class="menu">
-            <li class="logo"><a href="#"><span class="logo_mark"></span>不正1949</a></li>
+            <li class="logo"><a href=""><span class="logo_mark"></span>不正1949</a></li>
             <li id="about"><a href="#">关于</a></li>
-            <li id="tags"><a href="#">链接</a></li>
-            <li id="guidang"><a href="#">归档</a></li>
-            <li id="sort"><a href="#">分类</a></li>
+            <li id="sort"><a href="src/categories.html">分类</a></li>
             <li id="home"><a href="#">首页</a></li>
         </ul>
     </nav>
@@ -104,11 +102,9 @@
 
 //    处理搜索结果，将搜索结果显示
     function addArticlesToSearchResult(article_title,article_href){
-//        var search_list= $("<ul></ul>").addClass("search_result_content");
         var search_item = $('<li></li>');
         var search_href= $('<a></a>').text(article_title).attr("href",article_href);
         search_item.append(search_href);
-//        search_list.append(search_item);
         $('.search_result_content').append(search_item);
     }
 
