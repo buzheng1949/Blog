@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="src/css/main.css">
     <script type="text/javascript" src="src/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="src/js/Pagination.js"></script>
+    <script type="text/javascript" src="src/js/utils.js"></script>
 </head>
 <body>
 <!--头部-->
@@ -107,20 +108,6 @@
         search_item.append(search_href);
         $('.search_result_content').append(search_item);
     }
-
-    /**
-     * 用户获取Json长度
-     * @param jsonData
-     * @returns {number}
-     */
-    function getJsonLength(jsonData) {
-        var jsonLength = 0;
-        for (var item in jsonData) {
-            jsonLength++;
-        }
-        return jsonLength;
-    }
-
 
 
     //    整个页面处理入口
