@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/categories.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/Pagination.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
 </head>
 <body>
 <!--头部-->
@@ -84,6 +85,7 @@
     </ul>
 </footer>
 <script>
+
     /**
      * 构建显示文章分类到页面中
      * @param articleCategory 文章分类
@@ -92,11 +94,23 @@
      * @param article_href  文章链接
      */
     function appendCategoriesToWindow(articleCategory,article_time,articleName,article_href) {
-        
+        var category_item = $('<h3></h3>').text(articleCategory);
+        $('.content_article').append(category_item);
     }
+
     $(function () {
+        var categories_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/milestones";
+        var categories_json;
         //1、先加载数据到页面中 动态生成分类以及不同的文章列表
-        
+        $.getJSON(categories_url,function (json) {
+            categories_json = json;
+            for(var i = 0;i<getJsonLength(categories_json);i++){
+                var category = categories_json[i];
+                var category_name = category.title;
+                appendCategoriesToWindow(category_name,"","","");
+            }
+
+        });
     });
 </script>
 </body>
