@@ -25,10 +25,9 @@ header nav {
 }
 
 
-
-
 header nav ul{
     list-style: none;
+    margin-right: 120px;
 }
 
 header nav ul li{
