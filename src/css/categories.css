@@ -31,3 +31,41 @@
     text-decoration: none;
     background-color: transparent;
 }
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    text-transform: capitalize;
+}
+
+.blog-categories a{
+
+    color: #4183c4;
+    text-decoration: none;
+
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+    float: right;
+}
+
+.blog-categories-all-item{
+    padding-left: 0px;
+}
+

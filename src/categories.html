@@ -70,6 +70,29 @@
 
             </ul>
         </div>
+        <div class="all-categories">
+            <h3>Blog Categories</h3>
+            <div class="blog-categories">
+                <!--<ul class="blog-categories-all-item">-->
+                    <!--<li class="list-group-item">-->
+                        <!--<a href="#">Android</a>-->
+                        <!--<span class="badge">2</span>-->
+                    <!--</li>-->
+                    <!--<li class="list-group-item">-->
+                        <!--<a href="#">iOS</a>-->
+                        <!--<span class="badge">2</span>-->
+                    <!--</li>-->
+                    <!--<li class="list-group-item">-->
+                        <!--<a href="#">Think</a>-->
+                        <!--<span class="badge">2</span>-->
+                    <!--</li>-->
+                    <!--<li class="list-group-item">-->
+                        <!--<a href="#">iOS</a>-->
+                        <!--<span class="badge">2</span>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
     </div>
 </div>
 <!--尾部-->
@@ -87,19 +110,45 @@
 <script>
 
     var time_length = 10;
+
+    var articles = new Array();
+    //    所有的文章先放在数组里面
+    function addArticlesToArray(articleNum, articleName) {
+        articles[articleNum] = articleName;
+    }
+
+    //存放分类以及分类的数量
+    var categoryDetail = {}
+
+    //    处理搜索结果，将搜索结果显示
+    function addArticlesToSearchResult(article_title,article_href){
+        var search_item = $('<li></li>');
+        var search_href= $('<a></a>').text(article_title).attr("href",article_href);
+        search_item.append(search_href);
+        $('.search_result_content').append(search_item);
+    }
+
     /**
-     * 构建显示文章分类到页面中
-     * @param articleCategory 文章分类
-     * @param article_time  文章发表时间
-     * @param articleName  文章名字
-     * @param article_href  文章链接
+     * 动态增加博客分类的数目布局
      */
-    function appendCategoriesToWindow(articleCategory, article_time, articleName, article_href) {
-        var category_item = $('<h3></h3>').text(articleCategory);
-        $('.content_article').append(category_item);
+    function appendBlogCategories() {
+        var ul = $('<ul></ul>').addClass('blog-categories-all-item');
+        for (var prop in categoryDetail) {
+            if (categoryDetail.hasOwnProperty(prop)) {
+                console.log("key is " + prop + " value is " + categoryDetail[prop])
+                var li = $('<li></li>').addClass('list-group-item');
+                var a = $('<a></a>').attr('href', "#" + prop).text(prop);
+                var span = $('<span></span>').addClass('badge').text(categoryDetail[prop]);
+                li.append(a, span);
+                ul.append(li);
+            }
+        }
+        $('.blog-categories').append(ul);
     }
 
     $(function () {
+
+
         var categories_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/milestones";
         var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";
         var issues_json;
@@ -111,20 +160,30 @@
             for (var i = 0; i < getJsonLength(categories_json); i++) {
                 var category = categories_json[i];
                 var category_name = category.title;
+                var category_number = category.open_issues;
+//                console.log(category_number)
                 categoryArray[i] = category_name;
+                //以数组形式存放key-value
+                categoryDetail[category_name] = category_number;
             }
+            console.log("the first url is loaded")
+            appendBlogCategories();
 
         });
 
 //        2、拿到文章的所有数据
         $.getJSON(issues_url, function (json) {
             issues_json = json;
+            console.log("the second url is start")
             for (var i = 0; i < categoryArray.length; i++) {
+                console.log("the second url is loaded")
                 //得到所有的分类名字
                 var category = categoryArray[i];
-                var category_item = $('<h3></h3>').text(category);
+                var category_item = $('<h3></h3>').text(category).attr('id',category);
                 var category_item_list = $('<ol></ol>').addClass("categories-list");
+                console.log(issues_json == null)
                 for (var j = 0; j < getJsonLength(issues_json); j++) {
+                    addArticlesToArray(j, issues_json[j]);
                 if(issues_json[j].milestone.title == category){
                     var issue_time = issues_json[j].created_at.toString().substring(0, time_length);
                     var category_list_item = $('<li></li>').addClass("categories-list-item");
@@ -135,9 +194,25 @@
                     category_list_item.append(category_list_item_time,category_list_item_name);
                     category_item_list.append(category_list_item);
                 }
-
                 }
                 $('.content_article').append(category_item,category_item_list);
+            }
+
+
+        });
+
+
+        //给按钮增加点击事件  并将结果显示在结果栏
+        $("#search_btn_search").on("click", function () {
+            $(".search_result_content").empty();
+            //好象只能通过这份方法获取文本框的文字
+            var input_value = $("#search_box").val();
+            for (var i = 0; i < articles.length; i++) {
+                var issue = articles[i];
+                if (issue.title.search(input_value) != -1) {
+                    addArticlesToSearchResult(issue.title,issue.html_url);
+                }
+
             }
         });
 
