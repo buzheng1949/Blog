@@ -169,37 +169,39 @@
             console.log("the first url is loaded")
             appendBlogCategories();
 
-        });
 
 //        2、拿到文章的所有数据
-        $.getJSON(issues_url, function (json) {
-            issues_json = json;
-            console.log("the second url is start")
-            for (var i = 0; i < categoryArray.length; i++) {
-                console.log("the second url is loaded")
-                //得到所有的分类名字
-                var category = categoryArray[i];
-                var category_item = $('<h3></h3>').text(category).attr('id',category);
-                var category_item_list = $('<ol></ol>').addClass("categories-list");
-                console.log(issues_json == null)
-                for (var j = 0; j < getJsonLength(issues_json); j++) {
-                    addArticlesToArray(j, issues_json[j]);
-                if(issues_json[j].milestone.title == category){
-                    var issue_time = issues_json[j].created_at.toString().substring(0, time_length);
-                    var category_list_item = $('<li></li>').addClass("categories-list-item");
-                    var category_list_item_time = $('<span></span>').addClass("categories-list-item-time")
-                        .text(issue_time);
-                    var category_list_item_name = $('<a></a>').addClass("categories-list-item-name")
-                        .attr("href",issues_json[j].html_url).text(issues_json[j].title);
-                    category_list_item.append(category_list_item_time,category_list_item_name);
-                    category_item_list.append(category_list_item);
+            $.getJSON(issues_url, function (json) {
+                issues_json = json;
+                console.log("the second url is start")
+                for (var i = 0; i < categoryArray.length; i++) {
+                    console.log("the second url is loaded")
+                    //得到所有的分类名字
+                    var category = categoryArray[i];
+                    var category_item = $('<h3></h3>').text(category).attr('id',category);
+                    var category_item_list = $('<ol></ol>').addClass("categories-list");
+                    console.log(issues_json == null)
+                    for (var j = 0; j < getJsonLength(issues_json); j++) {
+                        addArticlesToArray(j, issues_json[j]);
+                        if(issues_json[j].milestone.title == category){
+                            var issue_time = issues_json[j].created_at.toString().substring(0, time_length);
+                            var category_list_item = $('<li></li>').addClass("categories-list-item");
+                            var category_list_item_time = $('<span></span>').addClass("categories-list-item-time")
+                                .text(issue_time);
+                            var category_list_item_name = $('<a></a>').addClass("categories-list-item-name")
+                                .attr("href",issues_json[j].html_url).text(issues_json[j].title);
+                            category_list_item.append(category_list_item_time,category_list_item_name);
+                            category_item_list.append(category_list_item);
+                        }
+                    }
+                    $('.content_article').append(category_item,category_item_list);
                 }
-                }
-                $('.content_article').append(category_item,category_item_list);
-            }
 
+
+            });
 
         });
+
 
 
         //给按钮增加点击事件  并将结果显示在结果栏
