@@ -1,0 +1,33 @@
+.content_about{
+    overflow: hidden;
+    font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    width: 900px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-height: 1382px;
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+}
+.content_about p{
+    font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
+    font-size: 16px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
+}
+
+.content_about a{
+    color: #4183c4;
+    text-decoration: none;
+}
+
+footer{
+    padding-left: 50px;
+    padding-top: 20px;
+}
