@@ -154,6 +154,7 @@
         var issues_json;
         var categories_json;
         var categoryArray = new Array();
+        var article_url = "article.html?issueid=";
         //1、先加载数据到页面中 获取对应的分类
         $.getJSON(categories_url, function (json) {
             categories_json = json;
@@ -161,7 +162,6 @@
                 var category = categories_json[i];
                 var category_name = category.title;
                 var category_number = category.open_issues;
-//                console.log(category_number)
                 categoryArray[i] = category_name;
                 //以数组形式存放key-value
                 categoryDetail[category_name] = category_number;
@@ -211,8 +211,11 @@
             var input_value = $("#search_box").val();
             for (var i = 0; i < articles.length; i++) {
                 var issue = articles[i];
+                console.log(issue.title)
                 if (issue.title.search(input_value) != -1) {
-                    addArticlesToSearchResult(issue.title,issue.html_url);
+                    var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
+                    console.log(article_url+issueid)
+                    addArticlesToSearchResult(issue.title,article_url+issueid);
                 }
 
             }

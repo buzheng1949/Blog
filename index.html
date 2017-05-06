@@ -127,7 +127,6 @@
                 var issue = issues_json[i];
                 var title = issue.title;
                 var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
-                console.log(issueid)
                 var des = issue.body.toString().substring(0, description_length) + "...";
                 var time = issue.created_at.toString().substring(0, time_length);
                 var category = issue.milestone.title;
@@ -147,8 +146,11 @@
             var input_value = $("#search_box").val();
             for (var i = 0; i < articles.length; i++) {
                 var issue = articles[i];
+                console.log(issue.title)
                 if (issue.title.search(input_value) != -1) {
-                    addArticlesToSearchResult(issue.title,issue.html_url);
+                    var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
+                    console.log(article_url+issueid)
+                    addArticlesToSearchResult(issue.title,article_url+issueid);
                 }
 
             }
