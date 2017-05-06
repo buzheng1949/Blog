@@ -184,12 +184,14 @@
                     for (var j = 0; j < getJsonLength(issues_json); j++) {
                         addArticlesToArray(j, issues_json[j]);
                         if(issues_json[j].milestone.title == category){
-                            var issue_time = issues_json[j].created_at.toString().substring(0, time_length);
+                            var issue = issues_json[j];
+                            var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
+                            var issue_time = issue.created_at.toString().substring(0, time_length);
                             var category_list_item = $('<li></li>').addClass("categories-list-item");
                             var category_list_item_time = $('<span></span>').addClass("categories-list-item-time")
                                 .text(issue_time);
                             var category_list_item_name = $('<a></a>').addClass("categories-list-item-name")
-                                .attr("href",issues_json[j].html_url).text(issues_json[j].title);
+                                .attr("href",article_url+issueid).text(issue.title);
                             category_list_item.append(category_list_item_time,category_list_item_name);
                             category_item_list.append(category_list_item);
                         }
@@ -220,8 +222,6 @@
 
             }
         });
-
-
 
 
     });
