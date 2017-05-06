@@ -16,9 +16,9 @@
 <header>
     <nav>
         <ul class="menu">
-            <li class="logo"><a href=""><span class="logo_mark"></span>不正1949</a></li>
+            <li class="logo"><a href="../index.html" style="color:#fff"><span class="logo_mark"></span>不正1949</a></li>
             <li id="about"><a href="#">关于</a></li>
-            <li id="sort"><a href="#">分类</a></li>
+            <li id="sort"><a href="#" style="color:#fff" id="main_page">分类</a></li>
             <li id="home"><a href="../index.html">首页</a></li>
         </ul>
     </nav>
@@ -147,8 +147,26 @@
         $('.blog-categories').append(ul);
     }
 
-    $(function () {
+    /**
+     * 处理鼠标移动移出的区别
+     */
+    function hover() {
+//        处理顶部导航栏的效果
+        $("header nav ul li").hover(function () {
+            $(this).children("a").css("color", "#fff");
+        }, function () {
+            $(this).children("a").css("color", "rgba(255, 255, 255, .5)");
+        });
 
+        //处理鼠标离开的时候恢复默认样式
+        $('header nav ul').mouseleave(function () {
+            $("#main_page").css("color", "#fff");
+        });
+
+    }
+
+    $(function () {
+        hover()
 
         var categories_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/milestones";
         var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";

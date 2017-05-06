@@ -10,16 +10,17 @@
     <script type="text/javascript" src="src/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="src/js/Pagination.js"></script>
     <script type="text/javascript" src="src/js/utils.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.4/showdown.min.js"></script>
 </head>
 <body>
 <!--头部-->
 <header>
     <nav>
         <ul class="menu">
-            <li class="logo"><a href=""><span class="logo_mark"></span>不正1949</a></li>
+            <li class="logo"><a href="" style="color:#fff"><span class="logo_mark"></span>不正1949</a></li>
             <li id="about"><a href="#">关于</a></li>
             <li id="sort"><a href="src/categories.html">分类</a></li>
-            <li id="home"><a href="#">首页</a></li>
+            <li id="home"><a href="#" style="color:#fff" id="main_page">首页</a></li>
         </ul>
     </nav>
 </header>
@@ -83,12 +84,14 @@
      */
     function hover() {
 //        处理顶部导航栏的效果
-        var beforecolor;
         $("header nav ul li").hover(function () {
-            beforecolor = $(this).children("a").css("color");
             $(this).children("a").css("color", "#fff");
         }, function () {
-            $(this).children("a").css("color", beforecolor);
+            $(this).children("a").css("color", "rgba(255, 255, 255, .5)");
+        });
+
+        $('header nav ul').mouseleave(function () {
+            $('#main_page').css("color", "#fff");
         });
 
     }
@@ -112,7 +115,6 @@
     $(function () {
         var issues_url = "https://api.github.com/repos/buzheng1949/buzheng1949.github.io/issues";
         var issues_json;
-        var description_length = 50;
         var time_length = 10;
         var article_url = "src/article.html?issueid=";
 
@@ -127,7 +129,9 @@
                 var issue = issues_json[i];
                 var title = issue.title;
                 var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
-                var des = issue.body.toString().substring(0, description_length) + "...";
+                var des = issue.body.toString().substring(0, issue.body.toString().indexOf("\r\n")) ;
+//                var converter = new showdown.Converter();
+//                var html_des = converter.makeHtml(des);
                 var time = issue.created_at.toString().substring(0, time_length);
                 var category = issue.milestone.title;
                 appendArticleToHome(title, article_url+issueid, des, time,category);
