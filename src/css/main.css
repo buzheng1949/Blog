@@ -126,10 +126,12 @@ header nav ul li{
 }
 
 footer{
+
     width: 1400px;
 }
 
 footer ul{
+    padding-right: 300px;
     margin: 0;
     list-style: none;
     text-align: center;
