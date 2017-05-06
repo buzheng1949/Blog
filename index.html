@@ -3,7 +3,8 @@
 
 <head lang="en">
     <meta charset="UTF-8">
-    <title>不正1943</title>
+    <title>不正</title>
+    <link rel="shortcut icon" href="src/img/index.ico">
     <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/main.css">
     <script type="text/javascript" src="src/js/jquery-3.2.1.min.js"></script>
@@ -47,8 +48,6 @@
         <li><a href="#" class="myshow">@2017 buzheng1949</a></li>
         <li><a href="#">首页</a></li>
         <li><a href="#">分类</a></li>
-        <li><a href="#">归档</a></li>
-        <li><a href="#">标签</a></li>
         <li><a href="#">关于</a></li>
         <li><a href="javascript:window.scrollTo(0,0)">TOP</a></li>
     </ul>
@@ -68,7 +67,7 @@
     function appendArticleToHome(article_title, article_tile_href, article_descripition, article_time,article_category) {
         var article_list_item = $('<li></li>').addClass("article-list-item");
         var article_list_item_name = $('<h3></h3>').addClass("article-list-item-name");
-        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href).attr("target", "_blank");
+        var article_href = $('<a></a>').text(article_title).attr('href', article_tile_href);
         article_list_item_name.append(article_href);
         var article_list_item_descripition = $('<p></p>').addClass("article-list-item-descripition").text(article_descripition);
         var article_list_item_other_msg = $('<p></p>').addClass("article-list-item-other-msg");
@@ -77,7 +76,6 @@
         article_list_item_other_msg.append(article_list_item_time,article_list_item_category);
         article_list_item.append(article_list_item_name, article_list_item_descripition, article_list_item_other_msg);
         article_list.append(article_list_item);
-
     }
 
     /**
@@ -116,6 +114,7 @@
         var issues_json;
         var description_length = 50;
         var time_length = 10;
+        var article_url = "src/article.html?issueid=";
 
         hover()
 
@@ -127,11 +126,12 @@
             for (var i = 0; i < getJsonLength(issues_json); i++) {
                 var issue = issues_json[i];
                 var title = issue.title;
-                var url = issue.html_url;
+                var issueid = issue.html_url.toString().charAt(issue.html_url.toString().length-1);
+                console.log(issueid)
                 var des = issue.body.toString().substring(0, description_length) + "...";
                 var time = issue.created_at.toString().substring(0, time_length);
                 var category = issue.milestone.title;
-                appendArticleToHome(title, url, des, time,category);
+                appendArticleToHome(title, article_url+issueid, des, time,category);
                 addArticlesToArray(i, issue);
             }
 
@@ -153,8 +153,6 @@
 
             }
         });
-
-
 
     });
 </script>
